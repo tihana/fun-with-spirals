@@ -20,7 +20,7 @@ For example:
 From square/location 1 the distance is 0.  
 From location 12 the distance is 3 (down, left, left).  
 From location 23 the distance is only 2 (up twice).  
-From location 1024 the distance is 31.
+From location 1024 the distance is 31.  
 From location 368078 the distance is 371.
 
 ### Requirements
