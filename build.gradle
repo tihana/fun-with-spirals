@@ -1,0 +1,56 @@
+buildscript {
+    dependencies {
+        classpath "org.github.ngbinh.scalastyle:gradle-scalastyle-plugin_2.11:1.0.1"
+    }
+}
+
+plugins {
+    id 'scala'
+    id "com.github.maiflai.scalatest" version "0.24"
+}
+
+apply plugin: 'scalaStyle'
+
+repositories {
+    mavenCentral()
+}
+
+group 'org.tihana'
+version '1.0.0'
+
+dependencies {
+    implementation "org.scala-lang:scala-library:2.11.12"
+    testImplementation "org.scalatest:scalatest_2.11:3.0.1"
+    testRuntime "org.pegdown:pegdown:1.4.2" // required by scalatest
+}
+
+scalaStyle {
+    configLocation = "scalastyle_config.xml"
+    includeTestSourceDirectory = true
+    source = "src/main/scala"
+    testSource = "src/test/scala"
+}
+
+tasks.withType(ScalaCompile) {
+    dependsOn scalaStyle
+}
+
+tasks.withType(Test) {
+    outputs.upToDateWhen { false } // always run tests
+}
+
+task run(type: JavaExec) {
+    description = 'Run the main class with JavaExec task'
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'org.tihana.spirals.FunWithSpirals'
+    standardInput = System.in
+}
+
+jar {
+    manifest.attributes('Main-Class': 'org.tihana.spirals.FunWithSpirals')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+defaultTasks 'clean', 'test'
