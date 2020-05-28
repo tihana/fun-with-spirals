@@ -7,6 +7,7 @@ object MatrixUtils {
   /**
    * Prints out the following to standard output:
    *  - Manhattan distance to the center (in a spiral matrix) for a specified number
+   *  - number of steps required in each direction (left or right, up or down) to reach the center
    *  - grid size (minimum number of rows/columns required for the spiral matrix to contain the specified number)
    *  - location (row and column) of the number for which Manhattan distance to the center was calculated
    *  - location (row and column) of the center of the spiral matrix
