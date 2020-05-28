@@ -16,9 +16,28 @@ object MatrixUtils {
    *                          Manhattan distance to the center of the matrix, size of the matrix and location (row and column) of the center of the matrix
    */
   def printDistance(manhattanDistance: ManhattanDistance): Unit = {
-    println(s"From location ${manhattanDistance.number} the distance is ${manhattanDistance.distance}")
+    print(s"From location ${manhattanDistance.number} the distance is ${manhattanDistance.distance}")
+    printSteps(manhattanDistance)
     println(s"Grid size: ${manhattanDistance.size} x ${manhattanDistance.size}, location: ${manhattanDistance.location}, center: ${manhattanDistance.center}")
     printSpiralMatrix(manhattanDistance)
+  }
+
+  /**
+   * Prints out to standard output number of steps required in each direction (left or right, up or down) to reach the center of the spiral matrix
+   * from the specified number (for which Manhattan distance was calculated).
+   *
+   * @param manhattanDistance the object containing a number (for which Manhattan distance was calculated), its location (row and column) in the spiral matrix,
+   *                          Manhattan distance to the center of the matrix, size of the matrix and location (row and column) of the center of the matrix
+   */
+  private def printSteps(manhattanDistance: ManhattanDistance): Unit = {
+    val columnDiff = manhattanDistance.location.column - manhattanDistance.center.column
+    val rightLeft = if (columnDiff > 0) Option(s"$columnDiff left") else if (columnDiff < 0) Option(s"${Math.abs(columnDiff)} right") else None
+    val rowDiff = manhattanDistance.location.row - manhattanDistance.center.row
+    val upDown = if (rowDiff > 0) Option(s"$rowDiff up") else if (rowDiff < 0) Option(s"${Math.abs(rowDiff)} down") else None
+    Seq(rightLeft, upDown).flatten.mkString(", ") match {
+      case steps: String if steps.nonEmpty => println(s" ($steps)")
+      case _ => println()
+    }
   }
 
   /**

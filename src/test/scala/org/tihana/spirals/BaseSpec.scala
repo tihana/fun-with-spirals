@@ -33,4 +33,5 @@ trait BaseSpec extends WordSpec with MustMatchers {
       |  41 20  7   8  9 10 27
       |  42 21 22  23 24 25 26
       |[43] 44 45  46 47 48 49""".stripMargin)
+  val steps = Seq("", " (1 up)", " (2 up)", " (3 right, 3 up)")
 }
