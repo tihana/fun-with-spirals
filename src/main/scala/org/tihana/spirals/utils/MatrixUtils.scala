@@ -56,7 +56,7 @@ object MatrixUtils {
       val maxDigits = Math.pow(size, 2).toInt.toString.length
       (0 until size) foreach { row =>
         (0 until size) foreach { column =>
-          // layer where the number we're printing out is (center of the matrix is layer 1, next layer towards the outside is 2 etc)
+          // layer where the number we're printing out is (center of the matrix is layer 0, next layer towards the outside is 1 etc)
           val layer = Math.max(Math.abs(size / 2 - row), Math.abs(size / 2 - column))
           // size of the matrix (number of rows/columns) for the layer where the number we're printing out is
           val sizeForLayer = 1 + 2 * layer
